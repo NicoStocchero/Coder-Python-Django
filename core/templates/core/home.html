@@ -1,0 +1,22 @@
+{% extends 'core/base.html' %} {% block title %}Inicio{% endblock %}
+
+<!-- Content -->
+{% block content %}
+<div class="container">
+  <h1 class="mb-4">Últimos posts</h1>
+
+  {% if posts %} {% for post in posts %}
+  <div class="card mb-3">
+    <div class="card-body">
+      <h4 class="card-title">{{ post.title }}</h4>
+      <p class="card-text">{{ post.content|truncatewords:30 }}</p>
+      <p class="text-muted">
+        Publicado: {{ post.created_at|date:"d M Y H:i" }}
+      </p>
+    </div>
+  </div>
+  {% endfor %} {% else %}
+  <div class="alert alert-info">Aún no hay publicaciones.</div>
+  {% endif %}
+</div>
+{% endblock %}

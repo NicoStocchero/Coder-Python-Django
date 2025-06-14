@@ -1,0 +1,19 @@
+{% extends 'core/base.html' %} {% block title %}Resultados{% endblock %}
+
+<!-- Content -->
+{% block content %}
+<div class="container">
+  <h1 class="mb-4">Resultados para "{{ query }}"</h1>
+
+  {% if resultados %} {% for post in resultados %}
+  <div class="card mb-3">
+    <div class="card-body">
+      <h4 class="card-title">{{ post.title }}</h4>
+      <p class="card-text">{{ post.content|truncatewords:20 }}</p>
+    </div>
+  </div>
+  {% endfor %} {% else %}
+  <div class="alert alert-warning">No se encontraron resultados.</div>
+  {% endif %}
+</div>
+{% endblock %}

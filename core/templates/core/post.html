@@ -1,0 +1,31 @@
+<!-- Extends the base template -->
+{% extends 'core/base.html' %}
+
+<!-- Load form tags -->
+{% load form_tags %}
+
+<!-- Title -->
+{% block title %}Nuevo post{% endblock %}
+
+<!-- Content -->
+{% block content %}
+<div class="container">
+  <h1 class="mb-4">Nuevo post</h1>
+
+  <form method="post">
+    {% csrf_token %}
+
+    <div class="form-group">
+      <label for="id_title">Título</label>
+      {{ form.title|add_class:"form-control" }}
+    </div>
+
+    <div class="form-group">
+      <label for="id_content">Contenido</label>
+      {{ form.content|add_class:"form-control" }}
+    </div>
+
+    <button type="submit" class="btn btn-primary">Publicar</button>
+  </form>
+</div>
+{% endblock %}

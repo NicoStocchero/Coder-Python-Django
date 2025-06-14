@@ -1,0 +1,22 @@
+{% extends 'core/base.html' %} {% block title %}Buscar{% endblock %}
+
+<!-- Content -->
+{% block content %}
+<div class="container">
+  <h1 class="mb-4">Buscar Posts</h1>
+
+  <form method="get" action="{% url 'result' %}">
+    <div class="form-group">
+      <label for="consulta">Título:</label>
+      <input
+        type="text"
+        name="consulta"
+        id="consulta"
+        class="form-control"
+        placeholder="Escribí un título..."
+      />
+    </div>
+    <button type="submit" class="btn btn-success">Buscar</button>
+  </form>
+</div>
+{% endblock %}
