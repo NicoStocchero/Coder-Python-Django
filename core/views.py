@@ -1,16 +1,37 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from .forms import PostForm
+from .models import Post
 
 def index(request):
-    return render(render, 'core/index.html')
+    posts = Post.objects.all()
+    return render(request, 'core/home.html',{'posts': posts})
 
-def salute(request):
-    return HttpResponse("¡Hola, mundo! Esta es la aplicación principal.")
+def post(request):
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Post creado correctamente')
+            return redirect('/')
+        else:
+            messages.error(request, 'Error al crear el post')
+    else:
+        form = PostForm()
+    
+    return render(request, 'core/post.html', {'form': form})
 
-def saludar_con_etiqueta(request):
-    return HttpResponse("<h1 style='color:blue;'>¡Hola, mundo!</h1> Esta es la aplicación principal.")
+def search(request):
+    return render(request, 'core/search.html')
 
-def saludar_con_parametros(request, nombre: str, apellido: str):
-    nombre = nombre.capitalize()
-    apellido = apellido.capitalize()
-    return HttpResponse(f"¡Hola, {nombre} {apellido}!")
+def result(request):
+    query = request.GET.get('consulta', '').strip()
+    if not query:
+        messages.warning(request, 'Ingresá un término para buscar.')
+        return redirect('search')
+
+    resultados = Post.objects.filter(title__icontains=query)
+    return render(request, 'core/result.html', {
+        'query': query,
+        'resultados': resultados,
+    })
