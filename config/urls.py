@@ -20,9 +20,9 @@ from django.urls import path
 from core import views
 
 urlpatterns = [
+    path('', views.index, name='index'),
+    path('post/', views.post, name='post'),
+    path('search/', views.search, name='search'),
+    path('result/', views.result, name='result'),
     path('admin/', admin.site.urls),
-    path('', views.index),
-    path('salute/', views.salute),
-    path('salute2/', views.saludar_con_etiqueta),
-    path('saludar3/', views.saludar_con_parametros),
 ]
