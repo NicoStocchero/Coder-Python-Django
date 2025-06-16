@@ -1,7 +1,7 @@
 {% extends 'core/base.html' %} {% block title %}Resultados{% endblock %} {% block content %}
 <div class="container">
   <h1 class="mb-4">
-    {% if query %} Resultados para "{{ query }}" {% if author or category %}
+    {% if query or author or category %} {% if query %} Resultados para "{{ query }}" {% if author or category %}
     <small class="text-muted d-block mt-2" style="font-size: 1.1rem">
       {% if author %}
       <span class="badge badge-primary px-2 py-1">Autor: {{ author.name }}</span>
@@ -13,18 +13,21 @@
     <small class="text-muted d-block mt-2" style="font-size: 1.1rem">
       <span class="badge badge-success px-2 py-1">Categoría: {{ category.name }}</span>
     </small>
-    {% endif %} {% elif category %} Posts en la categoría {{ category.name }} {% else %} Todos los posts {% endif %}
+    {% endif %} {% elif category %} Posts en la categoría {{ category.name }} {% endif %} {% else %} Todos los posts {% endif %}
   </h1>
 
   {% if results %} {% for post in results %}
   <div class="card mb-3">
     <div class="card-body">
-      <h4 class="card-title">{{ post.title }}</h4>
-      <p class="card-text text-secondary small">
-        por <strong>{{ post.author }}</strong> | Categoría: <em>{{ post.category }}</em>
-      </p>
+      <h4 class="card-title">
+        <a href="{% url 'post_detail' post.id %}" class="text-decoration-none text-dark">{{ post.title }}</a>
+      </h4>
+      <p class="card-text text-secondary small"> por <strong>{{ post.author }}</strong> | Categoría: <em>{{ post.category }}</em> </p>
       <p class="card-text">{{ post.content|truncatewords:20 }}</p>
-      <p class="text-muted small"> Publicado el {{ post.created_at|date:"d M Y H:i" }} </p>
+      <div class="d-flex justify-content-between align-items-center">
+        <p class="text-muted small mb-0"> Publicado el {{ post.created_at|date:"d M Y H:i" }} </p>
+        <a href="{% url 'post_detail' post.id %}" class="btn btn-outline-primary btn-sm"> Leer más </a>
+      </div>
     </div>
   </div>
   {% endfor %} {% else %}

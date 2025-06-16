@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .forms import PostForm
 from .models import Post, Author, Category
@@ -62,3 +62,7 @@ def result(request):
         'author': author_obj,
         'category': category_obj,
     })
+
+def post_detail(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    return render(request, 'core/post_detail.html', {'post': post})

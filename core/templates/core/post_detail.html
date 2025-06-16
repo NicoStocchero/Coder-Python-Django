@@ -1,0 +1,60 @@
+{% extends 'core/base.html' %} {% block title %}{{ post.title }}{% endblock %} {% block content %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-9">
+      <!-- Botón de regreso -->
+      <div class="mb-4">
+        <a href="javascript:history.back()" class="btn btn-light border shadow-sm"> <i class="fas fa-arrow-left mr-2"></i> Volver </a>
+      </div>
+
+      <!-- Post completo -->
+      <article class="card shadow border-0">
+        <div class="card-body p-5">
+          <!-- Título -->
+          <h1 class="card-title display-4 mb-3">{{ post.title }}</h1>
+
+          <!-- Meta info -->
+          <ul class="list-inline text-muted small mb-4">
+            {% if post.author %}
+            <li class="list-inline-item"> <i class="fas fa-user"></i> {{ post.author }} </li>
+            {% endif %} {% if post.category %}
+            <li class="list-inline-item"> <i class="fas fa-folder-open"></i> {{ post.category }} </li>
+            {% endif %}
+            <li class="list-inline-item"> <i class="fas fa-calendar-alt"></i> {{ post.created_at|date:"d M Y H:i" }} </li>
+          </ul>
+
+          <!-- Contenido -->
+          <div class="card-text text-dark lead"> {{ post.content|linebreaks }} </div>
+
+          <!-- Footer CTA -->
+          <hr class="mt-5" />
+          <div class="d-flex justify-content-between">
+            <a href="{% url 'post' %}" class="btn btn-primary shadow-sm"> <i class="fas fa-plus mr-1"></i> Crear nuevo post </a>
+            <a href="{% url 'search' %}" class="btn btn-outline-secondary"> <i class="fas fa-search mr-1"></i> Buscar más posts </a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</div>
+
+<!-- Agregar Font Awesome para los iconos -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+
+<style>
+  .card {
+    transition: all 0.3s ease-in-out;
+    border-radius: 12px;
+  }
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.08);
+  }
+  .btn {
+    transition: all 0.2s ease;
+  }
+  .btn:hover {
+    transform: translateY(-1px);
+  }
+</style>
+{% endblock %}
