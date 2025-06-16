@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .forms import PostForm
-from .models import Post
+from .models import Post, Author, Category
 
 def index(request):
     posts = Post.objects.all()
@@ -22,16 +22,43 @@ def post(request):
     return render(request, 'core/post.html', {'form': form})
 
 def search(request):
-    return render(request, 'core/search.html')
+    authors = Author.objects.all()
+    categories = Category.objects.all()
+    return render(request, 'core/search.html', {
+        'authors': authors,
+        'categories': categories,
+    })
 
 def result(request):
-    query = request.GET.get('consulta', '').strip()
-    if not query:
-        messages.warning(request, 'Ingresá un término para buscar.')
-        return redirect('search')
+    query = request.GET.get('query', '').strip()
+    author_id = request.GET.get('author')
+    category_id = request.GET.get('category')
 
-    resultados = Post.objects.filter(title__icontains=query)
+    results = Post.objects.all()
+
+    author_obj = None
+    category_obj = None
+
+    if query:
+        results = results.filter(title__icontains=query)
+    if author_id:
+        results = results.filter(author_id=author_id)
+        if author_id:
+            try:
+                author_obj = Author.objects.get(id=author_id)
+            except Author.DoesNotExist:
+                author_obj = None
+    if category_id:
+        results = results.filter(category_id=category_id)
+        if category_id:
+            try:
+                category_obj = Category.objects.get(id=category_id)
+            except Category.DoesNotExist:
+                category_obj = None
+
     return render(request, 'core/result.html', {
         'query': query,
-        'resultados': resultados,
+        'results': results,
+        'author': author_obj,
+        'category': category_obj,
     })
