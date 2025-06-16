@@ -25,6 +25,16 @@
       {{ form.content|add_class:"form-control" }}
     </div>
 
+    <div class="form-group">
+      <label for="id_author">Autor</label>
+      {{ form.author|add_class:"form-control" }}
+    </div>
+
+    <div class="form-group">
+      <label for="id_category">Categoría</label>
+      {{ form.category|add_class:"form-control" }}
+    </div>
+
     <button type="submit" class="btn btn-primary">Publicar</button>
   </form>
 </div>
