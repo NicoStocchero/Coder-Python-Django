@@ -2,21 +2,25 @@
 
 ## Descripción
 
-Aplicación web desarrollada con Django que permite crear y gestionar posts sobre desarrollo personal. Los usuarios pueden crear posts, filtrar por autor y categoría, y buscar contenido específico.
+Aplicación web desarrollada con Django que permite crear y gestionar posts sobre desarrollo personal. Los usuarios pueden crear posts, filtrar por autor y categoría, buscar contenido específico y leer posts completos en una vista detallada.
 
 ## Características
 
 - Creación de posts con título, contenido, autor y categoría
 - Búsqueda de posts por título
 - Filtrado por autor y categoría
+- Vista detallada de posts individuales
 - Interfaz responsive con Bootstrap
 - Panel de administración personalizado
+- Navegación intuitiva y diseño moderno
+- Animaciones suaves para mejor experiencia de usuario
 
 ## Tecnologías Utilizadas
 
 - Python 3.x
 - Django 4.x
 - Bootstrap 4.5
+- Font Awesome 5.15.4 (iconos)
 - SQLite (base de datos)
 
 ## Estructura del Proyecto
@@ -32,6 +36,12 @@ Aplicación web desarrollada con Django que permite crear y gestionar posts sobr
 │   ├── forms.py          # Formularios
 │   ├── admin.py          # Configuración del admin
 │   └── templates/        # Plantillas HTML
+│       ├── base.html     # Plantilla base
+│       ├── home.html     # Página principal
+│       ├── post.html     # Creación de posts
+│       ├── search.html   # Búsqueda
+│       ├── result.html   # Resultados
+│       └── post_detail.html # Vista detallada
 ├── docs/                  # Documentación
 └── .venv/                # Entorno virtual
 ```
@@ -83,6 +93,23 @@ python manage.py runserver
 
 - Acceder a `http://localhost:8000` para ver la aplicación
 - Acceder a `http://localhost:8000/admin` para el panel de administración
+- Funcionalidades principales:
+  - Ver lista de posts en la página principal
+  - Crear nuevos posts
+  - Buscar posts por título
+  - Filtrar por autor y categoría
+  - Ver posts completos en vista detallada
+  - Navegar entre diferentes secciones
+
+## Características de UX/UI
+
+- Diseño responsive y moderno
+- Animaciones suaves en interacciones
+- Iconos intuitivos
+- Navegación clara y consistente
+- Formato de fecha legible
+- Botones de acción contextuales
+- Diseño centrado en la legibilidad
 
 ## Información del Curso
 
