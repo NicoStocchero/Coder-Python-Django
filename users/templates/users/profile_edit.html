@@ -1,0 +1,62 @@
+{% extends 'core/base.html' %}
+
+<!-- Load form tags -->
+{% load form_tags %}
+
+<!-- Title -->
+{% block title %}Editar perfil{% endblock %}
+
+<!-- Content -->
+{% block content %}
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="card shadow-sm border-0">
+        <div class="card-header bg-primary text-white text-center">
+          <h4 class="mb-0">Editar Perfil</h4>
+        </div>
+        <div class="card-body">
+          <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="form-group mb-3">
+              <label for="id_first_name">Nombre</label>
+              {{ form.first_name|add_class:"form-control" }}
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="id_last_name">Apellido</label>
+              {{ form.last_name|add_class:"form-control" }}
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="id_email">Email</label>
+              {{ form.email|add_class:"form-control" }}
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="id_bio">Biografía</label>
+              {{ form.bio|add_class:"form-control" }}
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="id_birthdate">Fecha de nacimiento</label>
+              {{ form.birthdate|add_class:"form-control" }}
+            </div>
+
+            <div class="form-group mb-4">
+              <label for="id_avatar">Avatar</label>
+              {{ form.avatar|add_class:"form-control-file" }}
+            </div>
+
+            <div class="d-flex justify-content-between">
+              <a href="{% url 'profile' %}" class="btn btn-outline-secondary">Cancelar</a>
+              <button type="submit" class="btn btn-success">Guardar cambios</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
