@@ -8,24 +8,32 @@
 <div class="container my-5">
   <h2 class="mb-4">Mi Perfil</h2>
 
-  <div class="card p-4 shadow-sm">
-    <p><strong>Usuario:</strong> {{ request.user.username }}</p>
-    <p><strong>Email:</strong> {{ request.user.email }}</p>
-    <p><strong>Nombre:</strong> {{ request.user.first_name }}</p>
-    <p><strong>Apellido:</strong> {{ request.user.last_name }}</p>
+  <div class="card shadow-sm p-4">
+    <div class="row align-items-center">
+      <!-- Avatar -->
+      <div class="col-md-4 text-center mb-4 mb-md-0">
+        {% if profile.avatar %}
+        <img src="{{ profile.avatar.url }}" alt="Avatar" class="rounded-circle img-thumbnail" style="width: 150px; height: 150px; object-fit: cover" />
+        {% else %}
+        <div class="bg-secondary rounded-circle" style="width: 150px; height: 150px"></div>
+        <p class="mt-2">Sin avatar</p>
+        {% endif %}
+      </div>
 
-    {% if profile.bio %}
-    <p><strong>Biografía:</strong> {{ profile.bio }}</p>
-    {% endif %} {% if profile.birthdate %}
-    <p><strong>Fecha de nacimiento:</strong> {{ profile.birthdate }}</p>
-    {% endif %} {% if profile.avatar %}
-    <div class="mb-3">
-      <strong>Avatar:</strong><br />
-      <img src="{{ profile.avatar.url }}" alt="Avatar" class="img-thumbnail" style="max-width: 150px" />
+      <!-- Info -->
+      <div class="col-md-8">
+        <p><strong>Usuario:</strong> {{ request.user.username }}</p>
+        <p><strong>Email:</strong> {{ request.user.email }}</p>
+        <p><strong>Nombre:</strong> {{ request.user.first_name }}</p>
+        <p><strong>Apellido:</strong> {{ request.user.last_name }}</p>
+        {% if profile.bio %}
+        <p><strong>Biografía:</strong> {{ profile.bio }}</p>
+        {% endif %} {% if profile.birthdate %}
+        <p><strong>Fecha de nacimiento:</strong> {{ profile.birthdate }}</p>
+        {% endif %}
+        <a href="{% url 'profile_edit' %}" class="btn btn-primary mt-3">Editar Perfil</a>
+      </div>
     </div>
-    {% endif %}
-
-    <a href="{% url 'profile_edit' %}" class="btn btn-primary mt-3">Editar Perfil</a>
   </div>
 </div>
 {% endblock %}
