@@ -1,18 +1,14 @@
-<!-- Extends the base template -->
-{% extends 'core/base.html' %}
-
-<!-- Load form tags -->
-{% load form_tags %}
+{% extends 'core/base.html' %} {% load form_tags %}
 
 <!-- Title -->
-{% block title %}Nuevo post{% endblock %}
+{% block title %} {% if form.instance.pk %}Editar post{% else %}Nuevo post{% endif %} {% endblock %}
 
 <!-- Content -->
 {% block content %}
-<div class="container">
-  <h1 class="mb-4">Nuevo post</h1>
+<div class="container my-5">
+  <h1 class="mb-4"> {% if form.instance.pk %}Editar post{% else %}Nuevo post{% endif %} </h1>
 
-  <form method="post">
+  <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
 
     <div class="form-group">
@@ -35,7 +31,14 @@
       {{ form.category|add_class:"form-control" }}
     </div>
 
-    <button type="submit" class="btn btn-primary">Publicar</button>
+    {% if form.image %}
+    <div class="form-group">
+      <label for="id_image">Imagen</label>
+      {{ form.image|add_class:"form-control-file" }}
+    </div>
+    {% endif %}
+
+    <button type="submit" class="btn btn-primary mt-3"> {% if form.instance.pk %}Actualizar{% else %}Publicar{% endif %} </button>
   </form>
 </div>
 {% endblock %}

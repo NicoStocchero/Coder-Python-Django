@@ -1,10 +1,10 @@
 {% extends 'core/base.html' %} {% block title %}{{ post.title }}{% endblock %} {% block content %}
-<div class="container">
+<div class="container my-5">
   <div class="row justify-content-center">
     <div class="col-lg-9">
       <!-- Botón de regreso -->
       <div class="mb-4">
-        <a href="javascript:history.back()" class="btn btn-light border shadow-sm"> <i class="fas fa-arrow-left mr-2"></i> Volver </a>
+        <a href="{% url 'post_list' %}" class="btn btn-light border shadow-sm"> <i class="fas fa-arrow-left mr-2"></i> Volver al listado </a>
       </div>
 
       <!-- Post completo -->
@@ -26,11 +26,28 @@
           <!-- Contenido -->
           <div class="card-text text-dark lead"> {{ post.content|linebreaks }} </div>
 
-          <!-- Footer CTA -->
+          <!-- CTA Footer -->
           <hr class="mt-5" />
-          <div class="d-flex justify-content-between">
-            <a href="{% url 'post' %}" class="btn btn-primary shadow-sm"> <i class="fas fa-plus mr-1"></i> Crear nuevo post </a>
-            <a href="{% url 'search' %}" class="btn btn-outline-secondary"> <i class="fas fa-search mr-1"></i> Buscar más posts </a>
+          <div class="row align-items-center">
+            <div class="col-md-6 mb-2 mb-md-0">
+              <a href="{% url 'post_create' %}" class="btn btn-primary btn-block shadow-sm"> <i class="fas fa-plus mr-1"></i> Crear nuevo post </a>
+            </div>
+            <div class="col-md-6">
+              <a href="{% url 'search' %}" class="btn btn-outline-secondary btn-block"> <i class="fas fa-search mr-1"></i> Buscar más posts </a>
+            </div>
+          </div>
+
+          {% if user.is_authenticated %}
+          <div class="row mt-3">
+            <div class="col-md-6 mb-2 mb-md-0">
+              <a href="{% url 'post_edit' post.id %}" class="btn btn-warning btn-block"> <i class="fas fa-edit mr-1"></i> Editar </a>
+            </div>
+            <div class="col-md-6">
+              <a href="{% url 'post_delete' post.id %}" class="btn btn-danger btn-block"> <i class="fas fa-trash-alt mr-1"></i> Eliminar </a>
+            </div>
+            </div>
+          </div>
+          {% endif %}
           </div>
         </div>
       </article>
@@ -38,9 +55,7 @@
   </div>
 </div>
 
-<!-- Agregar Font Awesome para los iconos -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-
+<!-- Styles -->
 <style>
   .card {
     transition: all 0.3s ease-in-out;
