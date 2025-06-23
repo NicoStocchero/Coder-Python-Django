@@ -18,7 +18,8 @@ Aplicación web desarrollada con Django que permite crear y gestionar posts sobr
 ## Tecnologías Utilizadas
 
 - Python 3.x
-- Django 4.x
+- Django 5.x
+- widget_tweaks (mejoras en formularios)
 - Bootstrap 4.5
 - Font Awesome 5.15.4 (iconos)
 - SQLite (base de datos)
@@ -38,10 +39,23 @@ Aplicación web desarrollada con Django que permite crear y gestionar posts sobr
 │   └── templates/        # Plantillas HTML
 │       ├── base.html     # Plantilla base
 │       ├── home.html     # Página principal
-│       ├── post.html     # Creación de posts
+│       ├── about.html    # Sobre Mi
 │       ├── search.html   # Búsqueda
 │       ├── result.html   # Resultados
-│       └── post_detail.html # Vista detallada
+│       ├── post_*        # list, form, delete, detail
+│       ├── author_*      # list, form, delete
+│       └── category_*    # list, form, delete
+├── users/
+│   ├── models.py
+│   ├── views.py
+│   ├── forms.py
+│   ├── urls.py
+│   ├── signals.py
+│   └── templates/users/
+│       ├── login.html
+│       ├── signup.html
+│       ├── profile.html
+│       └──  profile_edit.html
 ├── docs/                  # Documentación
 └── .venv/                # Entorno virtual
 ```
@@ -100,6 +114,11 @@ python manage.py runserver
   - Filtrar por autor y categoría
   - Ver posts completos en vista detallada
   - Navegar entre diferentes secciones
+  - Login, registro y logout de usuarios
+  - Vista de perfil con avatar, bio y fecha de nacimiento
+  - Edición de perfil personalizada
+  - Formularios estilizados con Bootstrap y widget_tweaks
+  - Mensajes contextuales con Django messages
 
 ## Características de UX/UI
 
@@ -110,6 +129,11 @@ python manage.py runserver
 - Formato de fecha legible
 - Botones de acción contextuales
 - Diseño centrado en la legibilidad
+
+## Autor
+
+Este proyecto fue desarrollado por [Nicolás Stocchero](https://www.linkedin.com/in/nicostocchero/) como parte de la entrega final del curso de Python con Django en Coderhouse.  
+Apasionado por crear soluciones digitales que combinan diseño, lógica y experiencia de usuario.
 
 ## Información del Curso
 
