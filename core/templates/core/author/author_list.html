@@ -1,0 +1,40 @@
+{% extends 'core/base.html' %}
+
+<!-- Title -->
+{% block title %}Autores{% endblock %}
+
+<!-- Content -->
+{% block content %}
+<div class="container pt-4 pb-2">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="h3 mb-0">Autores</h1>
+    <a href="{% url 'author_create' %}" class="btn btn-success btn-sm">+ Nuevo autor</a>
+  </div>
+
+  {% if object_list %}
+  <div class="table-responsive shadow-sm">
+    <table class="table table-sm table-hover align-middle bg-white">
+      <thead class="thead-light">
+        <tr>
+          <th class="w-75">Nombre</th>
+          <th class="text-end">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for author in object_list %}
+        <tr>
+          <td>{{ author.name }}</td>
+          <td class="text-end">
+            <a href="{% url 'author_edit' author.id %}" class="btn btn-sm btn-outline-primary me-1">Editar</a>
+            <a href="{% url 'author_delete' author.id %}" class="btn btn-sm btn-outline-danger">Borrar</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <div class="alert alert-info text-center">No hay autores aún.</div>
+  {% endif %}
+</div>
+{% endblock %}
